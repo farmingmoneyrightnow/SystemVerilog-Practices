@@ -1,4 +1,4 @@
-module vending_machine (
+module vending_machine_1 (
     input  logic       clk,
     input  logic       rst_n,
     input  logic       nickel,
@@ -71,5 +71,6 @@ module vending_machine (
         	default: next_state = S0;
         endcase
     end
+
 
 endmodule
