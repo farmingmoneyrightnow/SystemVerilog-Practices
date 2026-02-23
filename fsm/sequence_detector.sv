@@ -8,14 +8,14 @@ module seq_detector (
 
   // One hot coding
   // parameter S0=4'b0000, S1=4'b0001, S2=4'b0010, S3=4'b0100;
-  parameter S0=2'b00, S1=2'b01, S2=2'b10, S3=2'b11;
+  parameter S0=3'b000, S1=3'b001, S2=3'b010, S3=3'b011, S4=3'b100;
 
-  reg [1:0] next_state, state;
+  reg [2:0] next_state, state;
 
   always @(*) begin
     next_state = state;
     case(state)
-      // Nothing
+      // IDLE
       S0: if (in == 1) next_state = S1;
       // 1
       S1: if (in == 0) next_state = S2;
@@ -26,8 +26,12 @@ module seq_detector (
       end
       // 100
       S3: begin
-        if (in == 1) next_state = S1;
+        if (in == 1) next_state = S4;
         else next_state = S0;
+      end
+      S4: begin
+        if (in == 0) next_state = S2;
+        else next_state = S1;
       end
       default: next_state = S0;	// need it if reg exceeds the bit use to represent the states
     endcase
@@ -40,6 +44,7 @@ module seq_detector (
 
   // Moore FSM output only depends on current state
   // Measly FSM output depends on current state and input
-  assign out = (state == S3) & in;
+  // assign out = (state == S3) & in;
+  assign out = (state == S4);
 
 endmodule
