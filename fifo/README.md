@@ -13,6 +13,8 @@ To solve this issue, I used two methods in my example code.
 
 2. 
 
+## Asynchronous FIFO
+
 ### References
 
 1. Clifford E. Cummings, *Simulation and Synthesis Techniques for Asynchronous FIFO Design* (SNUG San Jose, Rev. 1.2).  
