@@ -1,6 +1,6 @@
 `timescale 1ps/1ps
 module tb();
-    reg clk, rst_n;
+    reg  clk, rst_n;
     wire clk_out;
   
     initial begin
@@ -9,10 +9,10 @@ module tb();
     end
     
     divide_by_odd #(
-        .N (5)
+        .N       (5)
     ) dut (
-        .clk (clk),
-        .rst_n (rst_n),
+        .clk     (clk),
+        .rst_n   (rst_n),
         .clk_out (clk_out)
     );
     

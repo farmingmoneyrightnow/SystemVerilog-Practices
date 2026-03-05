@@ -1,8 +1,8 @@
 module divide_by_even #(
     parameter N = 4
 ) (
-    input logic clk,
-    input logic rst_n,
+    input logic  clk,
+    input logic  rst_n,
     output logic clk_out
 );
     localparam WIDTH = $clog2(N);

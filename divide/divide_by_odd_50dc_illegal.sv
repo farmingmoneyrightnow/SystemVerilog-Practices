@@ -3,8 +3,8 @@
 module divide_by_odd_50dc #(
     parameter N = 3
 ) (
-    input logic clk,
-    input logic rst_n,
+    input logic  clk,
+    input logic  rst_n,
     output logic clk_out
 );
     localparam WIDTH = $clog2(N);	// Rounds up
