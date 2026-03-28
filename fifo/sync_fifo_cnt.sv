@@ -37,9 +37,10 @@ module sync_fifo_counter #(
                 rd_data <= mem[rd_ptr];
                 rd_ptr  <= rd_ptr + 1'b1;
             end
+
             counter <= counter
-                     + ((wr_en && !full)  ? 1'b1 : 1'b0)
-                     - ((rd_en && !empty) ? 1'b1 : 1'b0);
+                    + ((wr_en && !full)  ? 1'b1 : 1'b0)
+                    - ((rd_en && !empty) ? 1'b1 : 1'b0);
         end
     end
 
