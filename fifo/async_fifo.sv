@@ -1,3 +1,4 @@
+`timescale 1ps/1ps
 module async_fifo #(
     parameter DEPTH = 16,    // Depth must be 2^n
     parameter WIDTH = 8,
@@ -21,7 +22,7 @@ module async_fifo #(
 
     logic [WIDTH-1:0] mem [DEPTH-1:0];
 
-    // Binary + Gray pointers
+    // Binary and Gray pointers
     logic [ADDR_W:0] wr_ptr_bin, rd_ptr_bin;
     logic [ADDR_W:0] wr_ptr_gray, rd_ptr_gray;
 
@@ -48,7 +49,7 @@ module async_fifo #(
             // gray of next pointer
             wr_ptr_gray_next = wr_ptr_next ^ (wr_ptr_next >> 1);
 
-            // full prediction uses rd_ptr_gray_sync2 with top two bits inverted
+            // full prediction
             full <= (wr_ptr_gray_next ==
                      {~rd_ptr_gray_sync2[ADDR_W:ADDR_W-1],
                        rd_ptr_gray_sync2[ADDR_W-2:0]});
@@ -93,10 +94,10 @@ module async_fifo #(
             // gray of next pointer
             rd_ptr_gray_next = rd_ptr_next ^ (rd_ptr_next >> 1);
 
-            // empty prediction compares next read pointer against synced write pointer
+            // empty prediction
             empty <= (rd_ptr_gray_next == wr_ptr_gray_sync2);
 
-            // perform read using CURRENT address, then commit pointer
+            // perform read using CURRENT address
             if (rd_en && !empty)
                 rdata <= mem[rd_ptr_bin[ADDR_W-1:0]];
 
